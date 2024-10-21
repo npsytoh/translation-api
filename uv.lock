@@ -97,6 +97,18 @@ wheels = [
 ]
 
 [[package]]
+name = "deepl"
+version = "1.19.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/25/97/48124f5656d3b82aa5e803dd3fa997487f323d6d811cefd08e7f6182648a/deepl-1.19.1.tar.gz", hash = "sha256:b9fb2291681c42c73f7b1fcb3f93f97d537722f7c00fd64e3dab7018cf9bb2a6", size = 39063 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f8/8b/c771a249f77013d31aa4b0e903168ede5069622dfdf2d8953942f608f783/deepl-1.19.1-py3-none-any.whl", hash = "sha256:870bb9edca00ba0b014e57160deb1fe97accf8d67eafa2a2402c6b765811a602", size = 35436 },
+]
+
+[[package]]
 name = "fastapi"
 version = "0.115.2"
 source = { registry = "https://pypi.org/simple" }
@@ -268,6 +280,7 @@ name = "python-uv-ruff-example"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "deepl" },
     { name = "fastapi" },
     { name = "uvicorn" },
 ]
@@ -283,6 +296,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "deepl", specifier = ">=1.19.1" },
     { name = "fastapi", specifier = ">=0.115.2" },
     { name = "uvicorn", specifier = ">=0.32.0" },
 ]
