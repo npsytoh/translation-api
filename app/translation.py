@@ -27,4 +27,4 @@ def request_translation(text: str, languages: object):
 def get_usage_count():
     translator = get_connection()
     usage = translator.get_usage()
-    return {"character": {"count": usage.character.count, "limit": usage.character.limit}}
+    return {"count": usage.character.count, "limit": usage.character.limit}
