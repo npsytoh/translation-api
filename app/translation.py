@@ -8,7 +8,7 @@ def get_connection():
     return translator
 
 
-def request_translation(text: str, lang: str):
+def request_translation(text: str, source_lang: str, target_lang: str):
     try:
         translator = get_connection()
     except Exception as e:
@@ -18,11 +18,11 @@ def request_translation(text: str, lang: str):
     if usage.any_limit_reached:
         return "Error: request limit reached"
 
-    result = translator.translate_text(text, target_lang=lang)
+    result = translator.translate_text(text, source_lang=source_lang, target_lang=target_lang)
     return result.text
 
 
 def get_usage_count():
     translator = get_connection()
     usage = translator.get_usage()
-    return {"count": usage.character.count, "limit": usage.character.limit}
+    return {"character": {"count": usage.character.count, "limit": usage.character.limit}}
