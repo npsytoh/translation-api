@@ -1,5 +1,6 @@
-import config
 import deepl
+
+from app import config
 
 
 def get_connection():
