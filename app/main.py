@@ -1,21 +1,18 @@
+from typing import Annotated
+
 import uvicorn
-from fastapi import FastAPI
-from schemas import LanguagesEnum, TranslateResponse
-from translation import get_usage_count, request_translation
+from fastapi import FastAPI, Query
+
+from app.schemas import TranslateParams, TranslateResponse
+from app.translation import request_translation
 
 app = FastAPI()
 
 
 @app.get("/translate", response_model=TranslateResponse)
-async def translate(text: str, source_lang: LanguagesEnum, target_lang: LanguagesEnum):
-    languages = {
-        "source": LanguagesEnum(source_lang).value,
-        "target": LanguagesEnum(target_lang).value,
-    }
-    result = request_translation(text, languages)
-    usage = get_usage_count()
-    return {"text": result, "usage": usage}
+async def translate(params: Annotated[TranslateParams, Query()]):
+    return request_translation(params)
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="localhost", port=8000)

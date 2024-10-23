@@ -3,22 +3,30 @@ from enum import Enum
 from pydantic import BaseModel
 
 
-class LanguagesEnum(str, Enum):
-    JA = "JA"
-    EN = "EN"
-    KO = "KO"
-    ZH = "ZH"
-    FR = "FR"
-    IT = "IT"
-    RU = "RU"
-    DE = "DE"
+class LanguageEnum(str, Enum):
+    Japanese = "JA"
+    English = "EN"
+    Korean = "KO"
+    Chinese = "ZH"
+    French = "FR"
+    Italian = "IT"
+    Russian = "RU"
+    German = "DE"
 
 
-class UsageResponse(BaseModel):
+class UsageBase(BaseModel):
     count: int
     limit: int
 
 
-class TranslateResponse(BaseModel):
+class TranslateBase(BaseModel):
     text: str
-    usage: UsageResponse
+
+
+class TranslateParams(TranslateBase):
+    source_lang: LanguageEnum
+    target_lang: LanguageEnum
+
+
+class TranslateResponse(TranslateBase):
+    usage: UsageBase
