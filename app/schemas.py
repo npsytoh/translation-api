@@ -4,20 +4,14 @@ from pydantic import BaseModel
 
 
 class LanguageEnum(str, Enum):
-    JA = "JA"
-    EN = "EN"
-    KO = "KO"
-    ZH = "ZH"
-    FR = "FR"
-    IT = "IT"
-    RU = "RU"
-    DE = "DE"
-
-
-class TranslateParams(BaseModel):
-    text: str
-    source_lang: LanguageEnum
-    target_lang: LanguageEnum
+    Japanese = "JA"
+    English = "EN"
+    Korean = "KO"
+    Chinese = "ZH"
+    French = "FR"
+    Italian = "IT"
+    Russian = "RU"
+    German = "DE"
 
 
 class UsageBase(BaseModel):
@@ -25,6 +19,14 @@ class UsageBase(BaseModel):
     limit: int
 
 
-class TranslateResponse(BaseModel):
+class TranslateBase(BaseModel):
     text: str
+
+
+class TranslateParams(TranslateBase):
+    source_lang: LanguageEnum
+    target_lang: LanguageEnum
+
+
+class TranslateResponse(TranslateBase):
     usage: UsageBase
